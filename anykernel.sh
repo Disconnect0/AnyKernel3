@@ -10,19 +10,21 @@ do.modules=0
 do.systemless=1
 do.cleanup=1
 do.cleanuponabort=0
-device.name1=ginkgo
-device.name2=willow
+device.name1=alioth
+device.name2=aliothin
 device.name3=
 device.name4=
 device.name5=
-supported.versions=10.0-12.0
+supported.versions=11-12
 supported.patchlevels=
 '; } # end properties
 
 # shell variables
-block=/dev/block/bootdevice/by-name/boot;
-is_slot_device=0;
+block=boot;
+is_slot_device=auto;
 ramdisk_compression=auto;
+patch_vbmeta_flag=auto;
+no_block_display=1
 
 
 ## AnyKernel methods (DO NOT CHANGE)
@@ -37,8 +39,10 @@ set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
 
 
 ## AnyKernel boot install
-dump_boot;
-write_boot;
+split_boot;
+
+flash_boot;
+flash_dtbo;
 ## end boot install
 
 
